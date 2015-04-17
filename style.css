@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  font: 16px sans-serif;
+}
+
+header {
+  text-transform: uppercase;
+  font-size: 22px;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+header h1 {
+  font-size: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+header select {
+  font-size: inherit;
+  margin: 0;
+  padding: 0;
+  background: #444;
+  color: #fff;
+  border: 0;
+  padding: 5px;
+}
+
+video {
+  width: 100%;
+}
+
+#videos {
+
+}
+
+.video {
+  float: left;
+}
+
+.video, #overlay {
+  width: 20%;
+}
+
+.video .inner {
+  padding: 1px;
+}
+
+#overlay {
+  position: absolute;
+  display: none;
+  color: #fff;
+  text-shadow: 0px 0px 10px #000;
+}
+
+#overlay-inner {
+  padding: 10px;
+}
+
+#overlay h2, #overlay p {
+  margin: 0;
+  padding: 0;
+}
