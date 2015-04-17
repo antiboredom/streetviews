@@ -4,7 +4,7 @@ var handlers = {
     title: 'Real Estate Assets Owned by Members of the U.S. Congress',
     handler: function(data){
       data.forEach(function(d){
-        addVideo('/congress_animation/' + d.pfid + '.mp4');
+        addVideo('http://streetviewvids.s3.amazonaws.com/congress_animation/' + d.pfid + '.mp4');
       });
 
       var overlay = d3.select('#overlay');
@@ -27,7 +27,7 @@ var handlers = {
     title: 'Privately Owned Prisons in the U.S.',
     handler: function(data){
       data.forEach(function(d){
-        addVideo('/prison_animation/' + d.serialid + '.mp4');
+        addVideo('http://streetviewvids.s3.amazonaws.com/prison_animation/' + d.serialid + '.mp4');
       });
 
       var overlay = d3.select('#overlay');
@@ -50,7 +50,7 @@ var handlers = {
     title: '100 Biggest Banks in the World',
     handler: function(data){
       data.forEach(function(d){
-        addVideo('/bank_animations/' + d.rank + '.mp4');
+        addVideo('http://streetviewvids.s3.amazonaws.com/bank_animations/' + d.rank + '.mp4');
       });
 
       var overlay = d3.select('#overlay');
