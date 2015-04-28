@@ -1,10 +1,12 @@
+var s3base = 'http://streetviewvids.s3.amazonaws.com';
+
 var handlers = {
   'congress': {
     file: 'property_animated.csv',
     title: 'Real Estate Assets Owned by Members of the U.S. Congress',
     handler: function(data){
       data.forEach(function(d){
-        addVideo('http://streetviewvids.s3.amazonaws.com/congress_animation/' + d.pfid + '.mp4');
+        addVideo(s3base + '/congress_animation/' + d.pfid + '.mp4');
       });
 
       var overlay = d3.select('#overlay');
@@ -23,11 +25,12 @@ var handlers = {
     }
   },
   'prison': {
-    file: 'private_filtered.csv',
+    file: 'private_filtered.csv?v=3',
+    // file: 'prisons_to_redo.csv?v=3',
     title: 'Privately Owned Prisons in the U.S.',
     handler: function(data){
       data.forEach(function(d){
-        addVideo('http://streetviewvids.s3.amazonaws.com/prison_animation/' + d.serialid + '.mp4');
+        addVideo(s3base + '/prison_animation/' + d.serialid + '.mp4');
       });
 
       var overlay = d3.select('#overlay');
@@ -50,7 +53,7 @@ var handlers = {
     title: '100 Biggest Banks in the World',
     handler: function(data){
       data.forEach(function(d){
-        addVideo('http://streetviewvids.s3.amazonaws.com/bank_animations/' + d.rank + '.mp4');
+        addVideo(s3base + '/bank_animations/' + d.rank + '.mp4');
       });
 
       var overlay = d3.select('#overlay');
@@ -161,9 +164,18 @@ function load_data(handler) {
   d3.csv(handler.file, handler.handler);
 }
 
-load_data(handlers[$('#set').val()]);
+var hash = window.location.hash;
+var s = hash.replace('#', '');
+if (hash && handlers[s]) {
+  load_data(handlers[s]);
+  $('#set').val(s);
+} else {
+  load_data(handlers[$('#set').val()]);
+}
+
 
 $('#set').on('change', function(){
   var handler = handlers[$(this).val()];
+  window.location.hash = '#' + $(this).val();
   load_data(handler);
 });
