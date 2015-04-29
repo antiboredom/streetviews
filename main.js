@@ -1,5 +1,5 @@
 var s3base = 'http://streetviewvids.s3.amazonaws.com';
-s3base = '';
+// s3base = '';
 
 var handlers = {
   'congress': {
