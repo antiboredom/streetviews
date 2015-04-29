@@ -1,4 +1,5 @@
 var s3base = 'http://streetviewvids.s3.amazonaws.com';
+s3base = '';
 
 var handlers = {
   'congress': {
@@ -24,9 +25,31 @@ var handlers = {
       });
     }
   },
+  'college': {
+    file: 'colleges.csv?v=2',
+    title: 'For-Profit Universities in the U.S.',
+    handler: function(data){
+      data.forEach(function(d){
+        addVideo(s3base + '/college_animation/' + d.id + '.mp4');
+      });
+
+      var overlay = d3.select('#overlay');
+
+      d3.selectAll('.video').data(data).on('mouseover', function(d){
+        overlay.select('#name').text(d.name);
+        overlay.select('#address').text(d.address);
+        overlay.select('#value').text('');
+        var o_height = $('#overlay').height();
+        var offset = $(this).offset();
+        var height = $(this).height();
+        overlay.style({left: offset.left, top: offset.top+height-o_height, display: 'block'});
+      }).on('mouseout', function(){
+        overlay.style({display: 'none'});
+      });
+    }
+  },
   'prison': {
     file: 'private_filtered.csv?v=3',
-    // file: 'prisons_to_redo.csv?v=3',
     title: 'Privately Owned Prisons in the U.S.',
     handler: function(data){
       data.forEach(function(d){
